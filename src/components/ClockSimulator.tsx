@@ -14,7 +14,7 @@ const ClockSimulator = () => {
     }[]
   >([]);
 
-  // Add page to the sequence
+  
   const handleAddPage = () => {
     const parsed = parseInt(inputPage.trim());
     if (!isNaN(parsed)) {
@@ -25,7 +25,7 @@ const ClockSimulator = () => {
     }
   };
 
-  // Clock Page Replacement Algorithm Simulation
+  
   const simulateClock = (pageSequence: number[]) => {
     const frames: (number | null)[] = Array(frameSize).fill(null);
     const referenceBits: number[] = Array(frameSize).fill(0);
@@ -40,31 +40,31 @@ const ClockSimulator = () => {
       const frameIndex = frames.indexOf(page);
 
       if (frameIndex !== -1) {
-        // Page already present
+        
         referenceBits[frameIndex] = 1;
         reason = "Already in memory";
       } else {
-        // Page fault
+        
         fault = true;
         pageFaults++;
 
         while (true) {
           if (frames[pointer] === null) {
-            // Found empty frame
+            
             frames[pointer] = page;
             referenceBits[pointer] = 1;
             reason = "Not in memory";
             pointer = (pointer + 1) % frameSize;
             break;
           } else if (referenceBits[pointer] === 0) {
-            // Replace the page
+            
             reason = `Replaced ${frames[pointer]}`;
             frames[pointer] = page;
             referenceBits[pointer] = 1;
             pointer = (pointer + 1) % frameSize;
             break;
           } else {
-            // Second chance
+            
             referenceBits[pointer] = 0;
             pointer = (pointer + 1) % frameSize;
           }
@@ -83,7 +83,7 @@ const ClockSimulator = () => {
     setSteps(newSteps);
   };
 
-  // Handle frame size change
+
   const handleFrameChange = (value: number) => {
     setFrameSize(value);
     setPages([]);
@@ -95,7 +95,7 @@ const ClockSimulator = () => {
     <div className="bg-[#E8E4DD] p-4 rounded-lg text-[#5A4F41]">
       <h3 className="font-medium text-lg mb-4">Clock Algorithm Simulator</h3>
 
-      {/* Input Controls */}
+     
       <div className="flex flex-col md:flex-row gap-4 mb-4">
         <input
           type="number"
@@ -120,7 +120,7 @@ const ClockSimulator = () => {
         </button>
       </div>
 
-      {/* Output Table */}
+      
       {steps.length > 0 && (
         <table className="w-full mt-4 border border-[#BFB9AF]">
           <thead>
